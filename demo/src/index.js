@@ -167,7 +167,7 @@ function main () {
 	window.WebSocket = window.WebSocket || window.MozWebSocket
 
 	var mysocket = new WebSocket(
-	'ws://demo2.cloud4533.novvum.io:9000', 'dumb-increment-protocol')
+	'ws://demo2.kible.io:9000', 'dumb-increment-protocol')
 
 	mysocket.binaryType = 'arraybuffer'
 

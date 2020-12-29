@@ -4,7 +4,10 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
+    },
+    devServer: {
+        host: 'demo2.kible.io',
+        port: 80,
     },
     module: {
         rules: [
