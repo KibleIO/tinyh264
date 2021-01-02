@@ -210,6 +210,58 @@ function main () {
                 mysocket.send(buffer)
         })
 
+	canvas.addEventListener('wheel', e => {
+		if (e.deltaY < 0) {
+			var buffer = new Uint8Array(16)
+	                var view = new DataView(buffer.buffer)
+
+	                view.setUint16(0, 0, true) //type
+	                view.setUint16(4, e.clientX, true) //x
+	                view.setUint16(6, e.clientY, true) //y
+	                view.setUint8 (8, 1, true) //clicked
+	                view.setUint16(10, 4, true) //button
+	                view.setUint16(12, 1, true) //state
+
+	                mysocket.send(buffer)
+
+			var buffer1 = new Uint8Array(16)
+	                var view1 = new DataView(buffer1.buffer)
+
+	                view1.setUint16(0, 0, true) //type
+	                view1.setUint16(4, e.clientX, true) //x
+	                view1.setUint16(6, e.clientY, true) //y
+	                view1.setUint8 (8, 1, true) //clicked
+	                view1.setUint16(10, 4, true) //button
+	                view1.setUint16(12, 0, true) //state
+
+	                mysocket.send(buffer1)
+		} else if (e.deltaY > 0) {
+			var buffer = new Uint8Array(16)
+	                var view = new DataView(buffer.buffer)
+
+	                view.setUint16(0, 0, true) //type
+	                view.setUint16(4, e.clientX, true) //x
+	                view.setUint16(6, e.clientY, true) //y
+	                view.setUint8 (8, 1, true) //clicked
+	                view.setUint16(10, 5, true) //button
+	                view.setUint16(12, 1, true) //state
+
+	                mysocket.send(buffer)
+
+			var buffer1 = new Uint8Array(16)
+	                var view1 = new DataView(buffer1.buffer)
+
+	                view1.setUint16(0, 0, true) //type
+	                view1.setUint16(4, e.clientX, true) //x
+	                view1.setUint16(6, e.clientY, true) //y
+	                view1.setUint8 (8, 1, true) //clicked
+	                view1.setUint16(10, 5, true) //button
+	                view1.setUint16(12, 0, true) //state
+
+	                mysocket.send(buffer1)
+		}
+	});
+
         canvas.addEventListener('mouseup', e => {
                 var buffer = new Uint8Array(16)
                 var view = new DataView(buffer.buffer)
