@@ -1,6 +1,7 @@
 import Worker from './H264NALDecoder.worker'
 import YUVSurfaceShader from './YUVSurfaceShader'
 import Texture from './Texture'
+import Worker1 from './second.worker'
 
 let screenResolutions = [[1920, 1080], [1680, 1050], [1600, 900], [1440, 900],
                          [1400, 1050], [1366, 768], [1360, 768], [1280, 1024],
@@ -96,16 +97,6 @@ function release () {
 	}
 }
 
-function decodeNext () {
-	const nextFrame = h264samples.shift()
-	if (nextFrame != null) {
-		decode(nextFrame)
-	} else {
-		const fps = (1000 / (Date.now() - start)) * nroFrames
-		window.alert(`Decoded ${nroFrames} (3440x1216) frames in ${Date.now() - start}ms @ ${fps >> 0}FPS`)
-	}
-}
-
 function initWebGLCanvas () {
 	canvas = document.createElement('canvas')
 	const gl = canvas.getContext('webgl')
@@ -186,15 +177,17 @@ function main () {
 		view1.setUint32(0, resValues[1], true)
 
 		mysocket.send(buffer1)
+
+		const workerr = new Worker1();
+		workerr.addEventListener('message', function(event) {
+			decode(new Uint8Array(event.data));
+		}, false);
+		workerr.postMessage("hello");
 	};
 
         mysocket.onerror = function () {
                 alert("failed to connect")
         };
-
-        mysocket.addEventListener('message',function(event) {
-                decode(new Uint8Array(event.data))
-        });
 
         canvas.addEventListener('mousemove', e => {
                 var buffer = new Uint8Array(16)
