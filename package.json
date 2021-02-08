@@ -1,28 +1,24 @@
 {
-  "name": "tinyh264",
-  "version": "0.0.6",
-  "description": "web assembly h264 decoder",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "files": [
-    "es",
-    "lib"
-  ],
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "build-wasm": "bash build_wasm.sh",
-    "build": "npm run build-wasm && nwb build-web-module --copy-files",
-    "clean": "nwb clean-web-module",
-    "prepublishOnly": "npm run build",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server"
   },
-  "dependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tinyh264": "0.0.6"
+  },
   "devDependencies": {
-    "nwb": "0.25.2"
-  },
-  "author": "Erik De Rijcke",
-  "homepage": "https://github.com/udevbe/tinyh264",
-  "license": "MIT",
-  "repository": "https://github.com/udevbe/tinyh264"
+    "file-loader": "^5.0.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "worker-loader": "^2.0.0"
+  }
 }
